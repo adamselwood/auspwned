@@ -1,0 +1,33 @@
+<head>
+  <title>AusPwned</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="icon" type="image/png" href="/favicon.png">
+</head>
+
+<body>
+
+  <div style="margin-top:30%"></div>
+  {{> hibp}}
+
+  {{> accountstate}}
+
+</body>
+
+<template name="hibp">
+  <div class="row">
+    <div class="center-align col s10 offset-s1">
+      <h5>Check an account</h5>
+      <input id="account" name="account" type="text" class="validate" placeholder="email or account"/>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Check Account</button>
+    </div>
+  </div>
+</template>
+
+<template name="accountstate">
+  <div class="center-align">
+    {{#if isCompromised}}
+      <p>Account has been compromised</p>
+      <button class="btn waves-effect waves-light" type="submit" name="action">More Information</button>
+    {{/if}}
+  </div>
+</template>
