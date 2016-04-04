@@ -4,21 +4,27 @@
   <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 
-<body>
+<body class="red darken-2">
 
-  <div style="margin-top:30%"></div>
+  <div class="white-text"><h1>P</h1></div>
+  <div class="row">
+    <div class="col s3 offset-s1 white-text"><p>Image</p></div>
+    <div class="col s7 white-text"><p>A "breach" is an incident where a site's data has been illegally accessed by hackers and then released publically</p></div>
+  </div>
   {{> hibp}}
 
   {{> accountstate}}
 
+  <div style="margin-bottom:10%"></div>
 </body>
 
 <template name="hibp">
   <div class="row">
-    <div class="center-align col s10 offset-s1">
-      <h5>Check an account</h5>
-      <input id="account" name="account" type="text" class="validate" placeholder="email or account"/>
-      <button class="btn waves-effect waves-light" type="submit" name="action">Check Account</button>
+    <div class="center-align col s10 offset-s1 white">
+      <p>Enter your username or email below to check if it's been compromised</p>
+      <input id="account" name="account" type="text" class="validate center-align" placeholder="email address or username"/>
+      <button class="btn waves-effect waves-light grey white-text" type="submit" name="action">Check Account</button>
+      <p></p>
     </div>
   </div>
 </template>
@@ -26,8 +32,9 @@
 <template name="accountstate">
   <div class="center-align">
     {{#if isCompromised}}
-      <p>Account has been compromised</p>
-      <button class="btn waves-effect waves-light" type="submit" name="action">More Information</button>
+      <b class="white-text">It looks like you've been compromised</b>
+      <p class="white-text">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p>
+      <button class="btn waves-effect waves-light white black-text" type="submit" name="action">More Information</button>
     {{/if}}
   </div>
 </template>
