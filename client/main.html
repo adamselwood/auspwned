@@ -1,29 +1,42 @@
 <head>
   <title>AusPwned</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="icon" type="image/png" href="/images/ap-logo.png">
 </head>
 
 <body class="red darken-2">
 
-  <div class="white-text"><h1>P</h1></div>
+</body>
+
+<template name="header">
   <div class="row">
-    <div class="col s3 offset-s1 white-text"><p>Image</p></div>
-    <div class="col s7 white-text"><p>A "breach" is an incident where a site's data has been illegally accessed by hackers and then released publically</p></div>
+    <div class="white-text valign-wrapper" style="margin: 20px"><img src="/images/ap-logo.png" height="80px"/><div class="valign center-align" style="margin-left: 10px"><h4>AusPwned</h4></div></div>
+  </div>
+</template>
+
+<template name="main">
+  {{> header}}
+  <div class="row">
+    <div class="white-text valign-wrapper">
+      <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-data.png" height="75px" style="margin-right:0px"/></div></div>
+      <div class="col s7 white-text" style="margin-left:0px"><p>A "breach" is an incident where a site's data has been illegally accessed by hackers and then released publically</p></div>
+    </div>
   </div>
   {{> hibp}}
 
   {{> accountstate}}
 
   <div style="margin-bottom:10%"></div>
-</body>
+</template>
 
 <template name="hibp">
   <div class="row">
     <div class="center-align col s10 offset-s1 white">
       <p>Enter your username or email below to check if it's been compromised</p>
-      <input id="account" name="account" type="text" class="validate center-align" placeholder="email address or username"/>
-      <button class="btn waves-effect waves-light grey white-text" type="submit" name="action">Check Account</button>
+      <form>
+        <input id="account" name="account" type="text" class="center-align" placeholder="email address or username"/>
+        <button class="btn waves-effect waves-light grey white-text" type="submit" name="action">Check Account</button>
+      </form>
       <p></p>
     </div>
   </div>
@@ -33,8 +46,24 @@
   <div class="center-align">
     {{#if isCompromised}}
       <b class="white-text">It looks like you've been compromised</b>
-      <p class="white-text">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p>
-      <button class="btn waves-effect waves-light white black-text" type="submit" name="action">More Information</button>
+      <div class="row">
+        <div class="white-text valign-wrapper">
+          <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
+          <div class="col s7 white-text" style="margin-left:0px"><p class="white-text left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
+        </div>
+      </div>
+      <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
     {{/if}}
   </div>
+</template>
+
+<template name="pwned">
+  {{> header}}
+  <div class="row">
+    <div class="white-text valign-wrapper">
+      <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-right:0px"/></div></div>
+      <div class="col s7 white-text" style="margin-left:0px"><p>I wish I was an iPad</p></div>
+    </div>
+  </div>
+  <div style="margin-bottom:10%"></div>
 </template>

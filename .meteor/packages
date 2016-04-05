@@ -22,3 +22,5 @@ materialize:materialize
 http
 session
 spacebars
+kadira:blaze-layout
+kadira:flow-router
