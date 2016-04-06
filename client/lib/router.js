@@ -9,3 +9,9 @@ FlowRouter.route('/pwned', {
     BlazeLayout.render("pwned");
   }
 });
+
+FlowRouter.route('/register', {
+  action: function() {
+    BlazeLayout.render("register");
+  }
+});

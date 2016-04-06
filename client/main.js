@@ -19,7 +19,30 @@ Template.hibp.events({
   }
 });
 
+Template.register.events({
+
+  'change': function(event, template) {
+    event.preventDefault();
+    var account = template.find('input#email').value;
+
+    Meteor.call("hibp", account, function(error, results) {
+        if (results.content) {
+          Session.set("account", account); //Set the account session variable as the last input
+          console.log(results.content); //results.data should be a JSON object
+        } else {
+          Session.set("account", false);
+        }
+    });
+  },
+});
+
 Template.accountstate.helpers({
+  'isCompromised': function() {
+    return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
+  }
+});
+
+Template.pwned_email.helpers({
   'isCompromised': function() {
     return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
   }

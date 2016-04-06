@@ -29,6 +29,51 @@
   <div style="margin-bottom:10%"></div>
 </template>
 
+<template name="register">
+  <div class="row brown lighten-5">
+    <div class="white-text valign-wrapper">
+      <div class="col s3 white-text"><div class="valign"><img src="/images/ap-laptop.png" height="75px" /></div></div>
+      <div class="col s9"><h5 class="grey-text text-darken-3" style="margin-bottom:0px">Sign up for a</h5><br/><h5 class="red-text" style="margin-top:0px">digital mailbox account</h5></div>
+    </div>
+    <form class="col s10 offset-s1 white">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="first_name" type="text">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="last_name" type="text">
+          <label for="last_name">Last Name</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="email" type="email">
+          <label for="email">Email</label>
+        </div>
+      {{> pwned_email}}
+        <div class="input-field col s12">
+          <input id="password" type="password">
+          <label for="password">Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="password" type="password">
+          <label for="password">Confirm Password</label>
+        </div>
+        <div class="input-field col s12">
+          <input id="street_address" type="text">
+          <label for="street_address">Street address</label>
+        </div>
+        <div class="input-field col s12" style="font-size: 60%">
+          <input type="checkbox" id="test5" />
+          <label for="test5">I agree to the <a href="#" class="grey-text text-darken-3">terms and conditions</a></label>
+        </div>
+      </div>
+      <div class="center-align" style="margin:30px">
+        <button class="btn waves-effect waves-light red darken-2 white-text" type="submit" name="action" style="display: block; width: 100%;">Submit</button>
+      </div>
+    </form>
+  </div>
+</template>
+
 <template name="hibp">
   <div class="row">
     <div class="center-align col s10 offset-s1 white">
@@ -53,6 +98,14 @@
         </div>
       </div>
       <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
+    {{/if}}
+  </div>
+</template>
+
+<template name="pwned_email">
+  <div class="center-align" style="margin:20px">
+    {{#if isCompromised}}
+      <b><a href="/pwned" class="red-text">It looks like you've been compromised</a></b>
     {{/if}}
   </div>
 </template>
