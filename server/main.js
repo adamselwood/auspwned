@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
   // code to run on server at startup
+  CheckedAccounts = new Mongo.Collection('CheckedAccounts');
 
 });
 
@@ -19,15 +20,23 @@ Meteor.methods({
                "User-Agent": "Testing" //Change this to something that reflects the calling agent (e.g. AusPwned)
              },
              params: {
-               truncateResponse: true //Switch this to false if you want to return the full response
+               truncateResponse: false //Switch this to false if you want to return the full response
              }
           });
 
-          console.log(account + " compromised"); //Do something on the server with the breached accounts
+          //Iterate the result and create a document for each breach associated with an account
+          _.each(result.data, function(item) {
+            CheckedAccounts.insert({account: account, breach: item.Name, sensitive: item.IsSensitive});
+          });
+
+
+          console.log(account + " compromised"); //Log result to server console
           return result; //Return the result of the query to the client
 
         } catch (error) {
-          console.log(account + " not-compromised"); //Do something on the server with the unbreached accounts
+          //Assume error indicates no breach and create document with breach as none fo that account
+          CheckedAccounts.insert({account: account, breach: 'none', sensitive: false});
+          console.log(account + " not-compromised"); //Log result to server console
           return false; //Nothing to see here
         }
     }

@@ -3,6 +3,8 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 import './main.html';
 
+CheckedAccounts = new Mongo.Collection('CheckedAccounts');
+
 Template.hibp.events({
   'click button': function(event, template) {
     event.preventDefault();
@@ -46,4 +48,15 @@ Template.pwned_email.helpers({
   'isCompromised': function() {
     return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
   }
+});
+
+Template.pwned.helpers({
+  'checked': function(){
+    var checked = CheckedAccounts.find().count();
+    return checked;
+  },
+
+  'compromised': function(){
+    return 0;
+  },
 });
