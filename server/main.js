@@ -26,7 +26,7 @@ Meteor.methods({
 
           //Iterate the result and create a document for each breach associated with an account
           _.each(result.data, function(item) {
-            CheckedAccounts.insert({account: account, breach: item.Name, sensitive: item.IsSensitive});
+            CheckedAccounts.insert({account: account, breach: item.Name, data_classes: item.DataClasses, sensitive: item.IsSensitive});
           });
 
 
@@ -39,5 +39,21 @@ Meteor.methods({
           console.log(account + " not-compromised"); //Log result to server console
           return false; //Nothing to see here
         }
+    },
+
+    //Raw MongoDB call for distinct accounts
+    //Return count of result
+    checked: function () {
+      var raw = CheckedAccounts.rawCollection(); //Raw mongodb call for distinct support
+      var distinct = Meteor.wrapAsync(raw.distinct, raw);
+      return distinct('account').length; //count number of distinct accounts
+    },
+
+    //Raw MongoDB call for distinct breached accounts
+    //Return count of result
+    breached: function () {
+      var raw = CheckedAccounts.rawCollection(); //Raw mongodb call for distinct support
+      var distinct = Meteor.wrapAsync(raw.distinct, raw);
+      return distinct('account', {breach: {$ne:"none"}}).length; //count number of distinct accounts
     }
 });

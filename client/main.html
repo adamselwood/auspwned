@@ -1,25 +1,25 @@
 <head>
-  <title>AusPwned</title>
+  <title>PostBreach</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="icon" type="image/png" href="/images/ap-logo.png">
+  <link rel="icon" type="image/png" href="/images/postbreach_red.png">
 </head>
 
-<body class="red darken-2">
+<body class="red brown lighten-5">
 
 </body>
 
 <template name="header">
-  <div class="row">
-    <div class="white-text valign-wrapper" style="margin: 20px"><img src="/images/ap-logo.png" height="80px"/><div class="valign center-align" style="margin-left: 10px"><h4>AusPwned</h4></div></div>
+  <div class="row red darken-2">
+    <div class="white-text valign-wrapper" style="padding: 20px"><img src="/images/postbreach_white.png" height="80px"/><div class="valign center-align" style="margin-left: 10px"><h4>PostBreach</h4></div></div>
   </div>
 </template>
 
 <template name="main">
   {{> header}}
   <div class="row">
-    <div class="white-text valign-wrapper">
-      <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-data.png" height="75px" style="margin-right:0px"/></div></div>
-      <div class="col s7 white-text" style="margin-left:0px"><p>A "breach" is an incident where a site's data has been illegally accessed by hackers and then released publically</p></div>
+    <div class="valign-wrapper">
+      <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-data.png" height="75px" style="margin-right:0px"/></div></div>
+      <div class="col s7" style="margin-left:0px"><p>A "breach" is an incident where a site's data has been illegally accessed by hackers and then released publically</p></div>
     </div>
   </div>
   {{> hibp}}
@@ -90,11 +90,11 @@
 <template name="accountstate">
   <div class="center-align">
     {{#if isCompromised}}
-      <b class="white-text">It looks like you've been compromised</b>
+      <b class="red-text">It looks like you've been compromised</b>
       <div class="row">
-        <div class="white-text valign-wrapper">
-          <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
-          <div class="col s7 white-text" style="margin-left:0px"><p class="white-text left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
+        <div class="valign-wrapper">
+          <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
+          <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
         </div>
       </div>
       <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
@@ -113,15 +113,21 @@
 <template name="pwned">
   {{> header}}
   <div class="row">
-    <div class="white-text valign-wrapper">
-      <div class="col s3 offset-s1 white-text"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-right:0px"/></div></div>
-      <div class="col s7 white-text" style="margin-left:0px"><p>I wish I was an iPad</p></div>
+    <div class="valign-wrapper">
+      <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-right:0px"/></div></div>
+      <div class="col s7" style="margin-left:0px"><p>I wish I was an iPad</p></div>
     </div>
   </div>
   <div class="row">
-    <div class="white-text valign-wrapper">
-      <div class="col white-text"><center><h1>{{checked}}</h1></center></div>
-      <div class="col white-text"><center><h4>Accounts Checked</h4></center></div>
+    <div class="valign-wrapper">
+      <div class="col"><center><h1>{{[numChecked]}}</h1></center></div>
+      <div class="col"><center><h4>Accounts Checked</h4></center></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col"><center><h1>{{[numBreached]}}</h1></center></div>
+      <div class="col"><center><h4>Accounts Breached</h4></center></div>
     </div>
   </div>
   <div style="margin-bottom:10%"></div>

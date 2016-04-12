@@ -51,12 +51,25 @@ Template.pwned_email.helpers({
 });
 
 Template.pwned.helpers({
-  'checked': function(){
-    var checked = CheckedAccounts.find().count();
-    return checked;
+  'numChecked': function(){
+    Meteor.call("checked", function(error, results) {
+        if (results) {
+          Session.set("checked", results);
+        } else {
+          console.log(error);
+        }
+    });
+    return Session.get("checked");
   },
 
-  'compromised': function(){
-    return 0;
+  'numBreached': function(){
+    Meteor.call("breached", function(error, results) {
+        if (results) {
+          Session.set("breached", results);
+        } else {
+          console.log(error);
+        }
+    });
+    return Session.get("breached");
   },
 });
