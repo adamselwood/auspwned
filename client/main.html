@@ -2,6 +2,7 @@
   <title>PostBreach</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link rel="icon" type="image/png" href="/images/postbreach_red.png">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body class="red brown lighten-5">
@@ -9,7 +10,7 @@
 </body>
 
 <template name="header">
-  <div class="row red darken-2">
+  <div class="row red darken-2 z-depth-2" style="position: sticky; width:100%">
     <div class="white-text valign-wrapper" style="padding: 20px"><img src="/images/postbreach_white.png" height="80px"/><div class="valign center-align" style="margin-left: 10px"><h4>PostBreach</h4></div></div>
   </div>
 </template>
@@ -46,8 +47,8 @@
           <label for="last_name">Last Name</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" type="email">
-          <label for="email">Email</label>
+          <input id="email" type="email" value="{{account}}">
+          <label class="active" for="email">Email</label>
         </div>
       {{> pwned_email}}
         <div class="input-field col s12">
@@ -68,7 +69,7 @@
         </div>
       </div>
       <div class="center-align" style="margin:30px">
-        <button class="btn waves-effect waves-light red darken-2 white-text" type="submit" name="action" style="display: block; width: 100%;">Submit</button>
+        <a class="btn waves-effect waves-light red darken-2 white-text" style="display: block; width: 100%;" href="/consumer">Submit</a>
       </div>
     </form>
   </div>
@@ -116,8 +117,14 @@
     <div class="valign-wrapper">
       <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-right:0px"/></div></div>
       <div class="col s7" style="margin-left:0px"><p>I wish I was an iPad</p></div>
+      <div class="col s7" style="margin-left:0px"><p><a href="register">Register a Digital Mailbox for more.</a></p></div>
     </div>
   </div>
+  <div style="margin-bottom:10%"></div>
+</template>
+
+<template name="scoreboard">
+  {{> header}}
   <div class="row">
     <div class="valign-wrapper">
       <div class="col"><center><h1>{{[numChecked]}}</h1></center></div>
@@ -129,6 +136,152 @@
       <div class="col"><center><h1>{{[numBreached]}}</h1></center></div>
       <div class="col"><center><h4>Accounts Breached</h4></center></div>
     </div>
+  </div>
+  <div style="margin-bottom:10%"></div>
+</template>
+
+<template name="business">
+  {{> header}}
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col"><center><p>They've signed up for what?!</p></center></div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="responsive bordered highlight">
+      <thead>
+        <tr>
+            <th data-field="user">User</th>
+            <th data-field="email">Email</th>
+            <th data-field="status">Status</th>
+            <th data-field="notify">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Fahour, Ahmed</td>
+          <td>ahmed.fahour@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Corbett, Christine</td>
+          <td>christine.corbett@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Walduck, Andrew</td>
+          <td>andrew.walduck@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Mak, Tian Ti</td>
+          <td>tianti.mak@auspost.com.au</td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+          <td><a href="mailto:tiamti.mak@auspost.com.au?Subject=Account%20Breach"><i class="small material-icons">mail</i></a></td>
+        </tr>
+        <tr>
+          <td>Selwood, Adam</td>
+          <td>adam.selwood@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Schafer, Andrew</td>
+          <td>andrew.schafer@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+      <div class="col"><center><button class="btn waves-effect waves-light white black-text">Restart Demo</button></center></div>
+  </div>
+
+  <div style="margin-bottom:10%"></div>
+</template>
+
+<template name="consumer">
+  {{> header}}
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col"><center><p>Your accounts are listed below. Use the corresponding cleanup buttons to remediate any compromised details</p></center></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col"><center><p>If your data has been compromised click here to reset the state of all accounts</p></center></div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="responsive bordered highlight">
+      <thead>
+        <tr>
+            <th data-field="service">Service</th>
+            <th data-field="account">Account</th>
+            <th data-field="cleanup">Cleanup</th>
+            <th data-field="status">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>MyPost</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+        </tr>
+        <tr>
+          <td>Adobe</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Ashley Madison</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Gmail</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Snapchat</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Pateron</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Gawker</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Forbes</td>
+          <td>{{account}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+      <div class="col"><center><a href="/business">Help my company fix this!!!!!</a></center></div>
   </div>
   <div style="margin-bottom:10%"></div>
 </template>
