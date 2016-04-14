@@ -30,6 +30,7 @@ Meteor.methods({
           //Iterate the result and create a document for each breach associated with an account
           _.each(pasteResult.data, function(item) {
             CheckedAccounts.insert({account: account, breach: 'paste', paste: item.Id, title: item.Title});
+            console.log(account + " pasted on " + item.Id);
           });
 
 
@@ -56,6 +57,7 @@ Meteor.methods({
           //Iterate the result and create a document for each breach associated with an account
           _.each(result.data, function(item) {
             CheckedAccounts.insert({account: account, breach: item.Name, data_classes: item.DataClasses, sensitive: item.IsSensitive});
+            console.log(account + " " + item.DataClasses + " on " + item.Name); //Log result to server console
           });
 
 
@@ -83,6 +85,14 @@ Meteor.methods({
       var raw = CheckedAccounts.rawCollection(); //Raw mongodb call for distinct support
       var distinct = Meteor.wrapAsync(raw.distinct, raw);
       return distinct('account').length; //count number of distinct accounts
+    },
+
+    //Raw MongoDB call for breaches for an accounts
+    //Return count of result
+    breaches: function (breachedaccount) {
+      var raw = CheckedAccounts.rawCollection(); //Raw mongodb call for distinct support
+      var distinct = Meteor.wrapAsync(raw.distinct, raw);
+      return distinct('breach', {account: breachedaccount});  //distinct breaches for account
     },
 
     //Raw MongoDB call for distinct breached accounts

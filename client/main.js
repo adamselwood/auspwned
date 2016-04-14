@@ -30,17 +30,53 @@ Template.register.events({
   'change': function(event, template) {
     event.preventDefault();
     var account = template.find('input#email').value;
-    var none = "none";
 
     Meteor.call("hibp", account, function(error, results) {
         if (results.content) {
           Session.set("account", account); //Set the account session variable as the last input
+          Session.set("consumer", account); 
           console.log(results.content); //results.data should be a JSON object
         } else {
-          Session.set("account", none);
+          Session.set("account", false);
         }
     });
   },
+
+  'click button': function(event, template) {
+    var consumer = template.find('input#email').value;
+    Session.set("consumer", consumer);
+    FlowRouter.go("/consumer");
+  }
+});
+
+Template.pwned.events({
+  'click button': function(event, template) {
+    event.preventDefault();
+    Session.set("account", false);
+    console.log("Reset");
+    FlowRouter.go("/register");
+  }
+});
+
+Template.business.events({
+  'click button': function(event, template) {
+    event.preventDefault();
+    Session.set("account", false);
+    console.log("Reset");
+    FlowRouter.go("/");
+  }
+});
+
+Template.pwned.helpers({
+  'breaches': function() {
+    var account = Session.get("account");
+    var breaches = null;
+    Meteor.call("breaches", account, function(error, results) {
+          console.log(results);
+          breaches = results;
+    });
+    return breaches;
+  }
 });
 
 Template.register.helpers({
@@ -76,23 +112,14 @@ Template.pwned_email.helpers({
 });
 
 Template.consumer.helpers({
-  'account': function() {
-    return Session.get("account");
+  'consumer': function() {
+    return Session.get("consumer");
   }
 });
 
 Template.business.helpers({
   'account': function() {
-    return Session.get("account");
-  }
-});
-
-Template.business.events({
-  'click button': function(event, template) {
-    event.preventDefault();
-    Session.set("account", false);
-    console.log("Reset");
-    FlowRouter.go("/");
+    return Session.get("consumer");
   }
 });
 
@@ -117,10 +144,5 @@ Template.scoreboard.helpers({
         }
     });
     return Session.get("breached");
-
-    var time = new Date().getTime();
-    $(document.body).bind("mousemove keypress", function(e) {
-        time = new Date().getTime();
-    });
   },
 });

@@ -30,6 +30,19 @@
   <div style="margin-bottom:10%"></div>
 </template>
 
+<template name="hibp">
+  <div class="row">
+    <div class="center-align col s10 offset-s1 white">
+      <p>Enter your username or email below to check if it's been compromised</p>
+      <form>
+        <input id="account" name="account" type="text" class="center-align" placeholder="email address or username"/>
+        <button class="btn waves-effect waves-light grey white-text" type="submit" name="action">Check Account</button>
+      </form>
+      <p></p>
+    </div>
+  </div>
+</template>
+
 <template name="register">
   <div class="row brown lighten-5">
     <div class="white-text valign-wrapper">
@@ -47,7 +60,7 @@
           <label for="last_name">Last Name</label>
         </div>
         <div class="input-field col s12">
-          <input id="email" type="email" value="{{account}}">
+          <input id="email" type="email" value="@auspost.com.au">
           <label class="active" for="email">Email</label>
         </div>
       {{> pwned_email}}
@@ -69,22 +82,9 @@
         </div>
       </div>
       <div class="center-align" style="margin:30px">
-        <a class="btn waves-effect waves-light red darken-2 white-text" style="display: block; width: 100%;" href="/consumer">Submit</a>
+        <button class="btn waves-effect waves-light red darken-2 white-text" style="display: block; width: 100%;">Submit</button>
       </div>
     </form>
-  </div>
-</template>
-
-<template name="hibp">
-  <div class="row">
-    <div class="center-align col s10 offset-s1 white">
-      <p>Enter your username or email below to check if it's been compromised</p>
-      <form>
-        <input id="account" name="account" type="text" class="center-align" placeholder="email address or username"/>
-        <button class="btn waves-effect waves-light grey white-text" type="submit" name="action">Check Account</button>
-      </form>
-      <p></p>
-    </div>
   </div>
 </template>
 
@@ -101,11 +101,11 @@
       <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
     {{/if}}
     {{#if notCompromised}}
-      <b class="green-text">Good News Everyone!</b>
+      <b class="green-text">No known breaches</b>
       <div class="row">
         <div class="valign-wrapper">
-          <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
-          <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
+          <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-verified.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
+          <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was not included in a known breach. Whilst this is good news for now, new breaches are occurring every day. There are some things you can do to minimise the risks future breaches.</p></div>
         </div>
       </div>
       <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
@@ -123,16 +123,182 @@
 
 <template name="pwned">
   {{> header}}
+
+  <div class="row">
+    <div class="col s12">
+      {{#each breaches}}
+        Breach
+        {{this}}
+        Breach
+      {{/each}}
+      Breaches should go here. They're logged on the server console as a fall back
+    </div>
+  </div>
   <div class="row">
     <div class="valign-wrapper">
       <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-right:0px"/></div></div>
-      <div class="col s7" style="margin-left:0px"><p>I wish I was an iPad</p></div>
-      <div class="col s7" style="margin-left:0px"><p><a href="register">Register a Digital Mailbox for more.</a></p></div>
+      <div class="col s7" style="margin-left:10px"><h4>Don't Panic</h4></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col s10 offset-s1"><p>While this service has identified your account has been compromised in a security breach, it does not necessarily mean that it has been exploited or that you have had your identity, personal data or money stolen.</p> <p>However, you should take some basic action and precautions to avoid any further damage.  This is particularly important if you use the same password or login details across multiple services.</p></div>
+    </div>
+  </div>
+  <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Find where your account is used</div>
+      <div class="collapsible-body">
+          <p>You should understand what services you have registered for with that email account</p>
+          <ul class="collection">
+            <li class="collection-item">1. Think about companies and services you interact with.</li>
+            <li class="collection-item">2. Search email for new registrations - often when you register for an online service you will receive an email confirmation.  By searching your email for keywords such as "username" "registration" or "password" you will likely find some services you haven't registered for.</li>
+            <li class="collection-item">3. Check your physical mail for useful reminders such as utility bills.</li>
+          </ul>
+          <p> </p>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">replay</i>Change critical passwords</div>
+      <div class="collapsible-body">
+          <p>Once you understand where your account information is used, you should login to the service, check for any unexpected transactions and change the password to a strong password.</p><p>You should prioritise accounts which are more valuable if they were to be compromised. These include:</p>
+          <ul class="collection">
+            <li class="collection-item">Banks and financial institution</li>
+            <li class="collection-item">Email services (e.g. Gmail, Yahoo)</li>
+            <li class="collection-item">Government websites and services (e.g. myGov, CentreLink)</li>
+            <li class="collection-item">Utility companies (e.g. phone, internet, gas, water, electricity providers)</li>
+            <li class="collection-item">Personal computer logins and backup services</li>
+          </ul>
+          <p> </p>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">toc</i>Consider a password manager</div>
+      <div class="collapsible-body">
+        <p>A password manager tool, such as LastPass or KeePass, will help you not only understand where you have been registered but also keep track of secure, unique passwords for you.  These tools can automatically log you in to your services and save you the hassle of remembering your passwords.</p>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">assessment</i>Monitor transactions</div>
+      <div class="collapsible-body">
+        <p>You should monitor your financial and other transactions and investigate any suspicious or unexpected transactions, particularly after a recent breach. Some warning signs may include:</p>
+        <ul class="collection">
+          <li class="collection-item">Unidentified bank transactions</li>
+          <li class="collection-item">Notifications that your personal details have been changed or that an account has been locked out</li>
+          <li class="collection-item">A sudden increase in spam mail</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">vpn_key</i>Implement 2-step Verification</div>
+      <div class="collapsible-body">
+        <p>Many sites now provide support for second factor authentication. Refer to <a href="http://auspost.com.au/business-solutions/electronic-authentication.html" target="blank">Australia Post's Eletronic Verification services</a> for more information</p>
+      </div>
+    </li>
+  </ul>
+  <script>
+    $(document).ready(function(){
+      $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    });
+  </script>
+  <div class="row">
+    <div class="col s12"><center><a href="http://www.idcare.org/tool-box/" target="blank"><img src="/images/idcare_logo.png" height="80px"/></a></center></div>
+  </div>
+  <div class="row">
+    <div class="col s12">If you think your identity has been compromised, you can call <a href="http://www.idcare.org/tool-box/" target="blank">iDcare</a>, a free identity theft support service on:<p><b>1300 432 273</b></p></div>
+  </div>
+  <div class="row">
+    <div class="col s12">iDcare is a partner of Australia Post and provides support for a range of identity theft issues, including those related to Australia Post.</div>
+  </div>
+  <div class="row">
+    <div class="col">
+      We also offer a range of identity services, including tools to help you manage your accounts in our MyPost Digital Mailbox service
+      <p><center><button class="btn waves-effect waves-light red darken-2 white-text">Register a Digital Mailbox</button></center></p>
     </div>
   </div>
   <div style="margin-bottom:10%"></div>
 </template>
 
+<template name="consumer">
+  {{> header}}
+  <div class="row">
+    <div class="valign-wrapper">
+      <div class="col"><center><p>Your accounts are listed below. Use the corresponding cleanup buttons to remediate any compromised details</p></center></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12"><center>If you think your identity has been compromised, you can call <a href="http://www.idcare.org/tool-box/" target="blank">iDcare</a>, a free identity theft support service on:<p><b>1300 432 273</b></p></center></div>
+  </div>
+  <div class="row">
+    <table class="responsive bordered highlight">
+      <thead>
+        <tr>
+            <th data-field="service">Service</th>
+            <th data-field="account">Account</th>
+            <th data-field="cleanup">Cleanup</th>
+            <th data-field="status"><center>Status</center></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>MyPost</td>
+          <td>{{consumer}}</td>
+          <td><a href="https://digitalmailbox.auspost.com.au/content/AP/en/settings.html#securityTab" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+        </tr>
+        <tr>
+          <td>Adobe</td>
+          <td>{{consumer}}</td>
+          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Ashley Madison</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Gmail</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Snapchat</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Pateron</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Gawker</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+        <tr>
+          <td>Forbes</td>
+          <td>{{consumer}}</td>
+          <td><a href="#" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+      <div class="col"><center><a href="/business">Help my company fix this!!!!!</a></center></div>
+  </div>
+  <div style="margin-bottom:10%"></div>
+</template>
 
 
 <template name="business">
@@ -203,86 +369,5 @@
       <div class="col"><center><button class="btn waves-effect waves-light white black-text">Restart Demo</button></center></div>
   </div>
 
-  <div style="margin-bottom:10%"></div>
-</template>
-
-<template name="consumer">
-  {{> header}}
-  <div class="row">
-    <div class="valign-wrapper">
-      <div class="col"><center><p>Your accounts are listed below. Use the corresponding cleanup buttons to remediate any compromised details</p></center></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="valign-wrapper">
-      <div class="col"><center><p>If your data has been compromised click here to reset the state of all accounts</p></center></div>
-    </div>
-  </div>
-  <div class="row">
-    <table class="responsive bordered highlight">
-      <thead>
-        <tr>
-            <th data-field="service">Service</th>
-            <th data-field="account">Account</th>
-            <th data-field="cleanup">Cleanup</th>
-            <th data-field="status"><center>Status</center></th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>MyPost</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons green-text">done</i></center></td>
-        </tr>
-        <tr>
-          <td>Adobe</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Ashley Madison</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Gmail</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Snapchat</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Pateron</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Gawker</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-        <tr>
-          <td>Forbes</td>
-          <td>{{account}}</td>
-          <td><a href="https://accounts.adobe.com/security/change-password" target="blank"><i class="small material-icons">replay</i></a><a href="http://www.idcare.org"><img src="http://www.idcare.org/wp-content/uploads/2015/04/idc_fav_con.gif" style="height: 2rem"/></a></td>
-          <td><center><i class="small material-icons orange-text">warning</i></center></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="row">
-      <div class="col"><center><a href="/business">Help my company fix this!!!!!</a></center></div>
-  </div>
   <div style="margin-bottom:10%"></div>
 </template>
