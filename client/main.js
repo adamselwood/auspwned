@@ -48,7 +48,12 @@ Template.register.helpers({
 
 Template.accountstate.helpers({
   'isCompromised': function() {
-    return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
+    var none = "none";
+    if (Session.get("account") == none) {
+      return false;
+    } else {
+      return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
+    }
   },
 
   'notCompromised': function() {
@@ -58,7 +63,6 @@ Template.accountstate.helpers({
     } else {
       return false;
     }
-    return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
   }
 });
 

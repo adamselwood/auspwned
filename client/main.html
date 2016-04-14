@@ -100,6 +100,16 @@
       </div>
       <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
     {{/if}}
+    {{#if notCompromised}}
+      <b class="green-text">Good News Everyone!</b>
+      <div class="row">
+        <div class="valign-wrapper">
+          <div class="col s3 offset-s1"><div class="valign"><img src="/images/ap-computer.png" height="75px" style="margin-top: 20px; margin-right:0px"/></div></div>
+          <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
+        </div>
+      </div>
+      <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
+    {{/if}}
   </div>
 </template>
 
