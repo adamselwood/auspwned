@@ -38,7 +38,7 @@ Meteor.methods({
 
         } catch (error) {
           //Assume error indicates no breach and create document with breach as none fo that account
-          CheckedAccounts.insert({account: account, paste: 'none',});
+          CheckedAccounts.insert({account: account, breach: 'none', paste: 'none',});
           console.log(account + " not-pasted"); //Log result to server console
           pasted = false; //Nothing to see here
         }

@@ -134,20 +134,28 @@
 </template>
 
 <template name="scoreboard">
-  {{> header}}
+  <center>
+  <div style="margin-top:10%"></div>
+  <img src="/images/postbreach_logo.png" height="200px"/>
+
   <div class="row">
     <div class="valign-wrapper">
-      <div class="col"><center><h1>{{[numChecked]}}</h1></center></div>
-      <div class="col"><center><h4>Accounts Checked</h4></center></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="valign-wrapper">
-      <div class="col"><center><h1>{{[numBreached]}}</h1></center></div>
-      <div class="col"><center><h4>Accounts Breached</h4></center></div>
+      <div class="col s6">
+        <center>
+          <h1 style="font-size:160px">{{[numChecked]}}</h1>
+          <h4>Accounts Checked</h4>
+        </center>
+      </div>
+      <div class="col s6">
+        <center>
+          <h1 style="font-size:160px">{{[numBreached]}}</h1>
+          <h4>Accounts Breached</h4>
+        </center>
+      </div>
     </div>
   </div>
   <div style="margin-bottom:10%"></div>
+  </center>
 </template>
 
 <template name="business">
@@ -158,7 +166,7 @@
     </div>
   </div>
   <div class="row">
-    <table class="responsive bordered highlight">
+    <table class="responsive bordered highlight centered">
       <thead>
         <tr>
             <th data-field="user">User</th>
@@ -169,6 +177,12 @@
       </thead>
 
       <tbody>
+        <tr>
+          <td>Lastname, Firstname</td>
+          <td>{{account}}</td>
+          <td><center><i class="small material-icons orange-text">warning</i></center></td>
+          <td><a href="mailto:{{account}}?Subject=Account%20Breach"><i class="small material-icons">mail</i></a></td>
+        </tr>
         <tr>
           <td>Fahour, Ahmed</td>
           <td>ahmed.fahour@auspost.com.au</td>
@@ -234,7 +248,7 @@
             <th data-field="service">Service</th>
             <th data-field="account">Account</th>
             <th data-field="cleanup">Cleanup</th>
-            <th data-field="status">Status</th>
+            <th data-field="status"><center>Status</center></th>
         </tr>
       </thead>
 

@@ -78,6 +78,12 @@ Template.consumer.helpers({
   }
 });
 
+Template.business.helpers({
+  'account': function() {
+    return Session.get("account");
+  }
+});
+
 Template.business.events({
   'click button': function(event, template) {
     event.preventDefault();
