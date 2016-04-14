@@ -8,6 +8,9 @@ CheckedAccounts = new Mongo.Collection('CheckedAccounts');
 Template.hibp.events({
   'click button': function(event, template) {
     event.preventDefault();
+
+    Materialize.toast('Checking breaches', 2000);
+
     var account = template.find('input#account').value;
     var none = "none"
 
@@ -27,7 +30,7 @@ Template.register.events({
   'change': function(event, template) {
     event.preventDefault();
     var account = template.find('input#email').value;
-    var none = "none"
+    var none = "none";
 
     Meteor.call("hibp", account, function(error, results) {
         if (results.content) {
@@ -114,5 +117,10 @@ Template.scoreboard.helpers({
         }
     });
     return Session.get("breached");
+
+    var time = new Date().getTime();
+    $(document.body).bind("mousemove keypress", function(e) {
+        time = new Date().getTime();
+    });
   },
 });
