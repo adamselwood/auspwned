@@ -27,17 +27,19 @@ Template.hibp.events({
 
 Template.register.events({
 
-  'change': function(event, template) {
+  'change #email': function(event, template) {
     event.preventDefault();
     var account = template.find('input#email').value;
 
+    Materialize.toast('Checking breaches', 2000);
+
     Meteor.call("hibp", account, function(error, results) {
         if (results.content) {
-          Session.set("account", account); //Set the account session variable as the last input
-          Session.set("consumer", account); 
+          //Session.set("account", account); //Set the account session variable as the last input
+          Session.set("consumer", account);
           console.log(results.content); //results.data should be a JSON object
         } else {
-          Session.set("account", false);
+          Session.set("consumer", false);
         }
     });
   },
@@ -45,7 +47,7 @@ Template.register.events({
   'click button': function(event, template) {
     var consumer = template.find('input#email').value;
     Session.set("consumer", consumer);
-    FlowRouter.go("/consumer");
+    FlowRouter.go("/consumer/" + consumer);
   }
 });
 
@@ -53,7 +55,7 @@ Template.pwned.events({
   'click button': function(event, template) {
     event.preventDefault();
     Session.set("account", false);
-    console.log("Reset");
+    console.log("account cleared");
     FlowRouter.go("/register");
   }
 });
@@ -62,6 +64,8 @@ Template.business.events({
   'click button': function(event, template) {
     event.preventDefault();
     Session.set("account", false);
+    Session.set("consumer", false);
+    Session.set("breaches", false);
     console.log("Reset");
     FlowRouter.go("/");
   }
@@ -79,11 +83,12 @@ Template.pwned.helpers({
   }
 });
 
-Template.register.helpers({
-  'account': function() {
-    return Session.get("account");
-  }
-});
+//Template.register.helpers({
+//  'account': function() {
+//    console.log(Session.get("consumer"));
+//    return Session.get("consumer");
+//  }
+//});
 
 Template.accountstate.helpers({
   'isCompromised': function() {
@@ -107,7 +112,7 @@ Template.accountstate.helpers({
 
 Template.pwned_email.helpers({
   'isCompromised': function() {
-    return Session.get("account"); //Returns current state of account Session to trigger display of compromised div
+    return Session.get("consumer"); //Returns current state of account Session to trigger display of compromised div
   }
 });
 

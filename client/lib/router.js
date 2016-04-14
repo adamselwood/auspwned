@@ -22,8 +22,10 @@ FlowRouter.route('/business', {
   }
 });
 
-FlowRouter.route('/consumer', {
-  action: function() {
+FlowRouter.route('/consumer/:consumeraccount', {
+  action: function(params, queryParams) {
+    console.log("Consumer Page for: ", params.consumeraccount);
+    Session.set("consumer", params.consumeraccount);
     BlazeLayout.render("consumer");
   }
 });
