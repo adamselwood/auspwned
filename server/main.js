@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 Meteor.startup(() => {
   // code to run on server at startup
   CheckedAccounts = new Mongo.Collection('CheckedAccounts');
-
+  Counter = new Mongo.Collection("counter");
 });
 
 Meteor.methods({
@@ -23,7 +23,6 @@ Meteor.methods({
                "User-Agent": "PostBreach" //Change this to something that reflects the calling agent (e.g. AusPwned)
              },
              params: {
-               truncateResponse: false //Switch this to false if you want to return the full response
              }
           });
 
@@ -35,13 +34,12 @@ Meteor.methods({
 
 
           console.log(account + " pasted"); //Log result to server console
-          pasted = true; //Return the result of the query to the client
+          pasted = pasteResult; //Return the result of the query to the client
 
         } catch (error) {
           //Assume error indicates no breach and create document with breach as none fo that account
           CheckedAccounts.insert({account: account, breach: 'none', paste: 'none',});
           console.log(account + " not-pasted"); //Log result to server console
-          pasted = false; //Nothing to see here
         }
 
         try {
@@ -63,6 +61,7 @@ Meteor.methods({
 
           console.log(account + " breached"); //Log result to server console
           breached = true;
+          Counter.update({}, {$inc: {value: 1}});
           return result; //Return the result of the query to the client
 
         } catch (error) {
@@ -72,8 +71,10 @@ Meteor.methods({
           breached = false; //Nothing to see here
         }
 
+        Counter.update({}, {$inc: {value: 1}});
+
         if (pasted) {
-          return true;
+          return pasted;
         } else {
           return false;
         }

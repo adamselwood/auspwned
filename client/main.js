@@ -4,6 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 CheckedAccounts = new Mongo.Collection('CheckedAccounts');
+Counter = new Mongo.Collection("counter");
 
 Template.hibp.events({
   'click button': function(event, template) {
@@ -149,5 +150,9 @@ Template.scoreboard.helpers({
         }
     });
     return Session.get("breached");
+  },
+
+  counter: function () {
+    return Counter.findOne();
   },
 });

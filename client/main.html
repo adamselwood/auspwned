@@ -1,6 +1,6 @@
 <head>
   <title>PostBreach</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <link rel="icon" type="image/png" href="/images/postbreach_red.png">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
@@ -46,8 +46,8 @@
 <template name="register">
   <div class="row brown lighten-5">
     <div class="white-text valign-wrapper">
-      <div class="col s3 white-text"><div class="valign"><img src="/images/ap-laptop.png" height="75px" /></div></div>
-      <div class="col s9"><h5 class="grey-text text-darken-3" style="margin-bottom:0px">Sign up for a</h5><br/><h5 class="red-text" style="margin-top:0px">digital mailbox account</h5></div>
+      <div class="col s1 offset-s1 white-text"><div class="valign"><img src="/images/ap-laptop.png" height="75px" /></div></div>
+      <div class="col s9 left-align"><h5 class="grey-text text-darken-3 left-align" style="margin-bottom:0px">Sign up for a</h5><br/><h5 class="red-text left-align" style="margin-top:0px">digital mailbox account</h5></div>
     </div>
     <form class="col s10 offset-s1 white">
       <div class="row">
@@ -98,7 +98,12 @@
           <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was included in a known breach. Review the types of data that were compromised (email addresses, passwords, credit cards etc.) and take appropriate action, such as changing passwords.</p></div>
         </div>
       </div>
-      <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
+      <div class="row">
+        <div class="valign-wrapper">
+          <div class="col s10 offset-s1"><center><p><span class="red-text">PostBreach</span> offer a number of services to help you deal with and minimise the impact of account breaches.</p></center></div>
+        </div>
+      </div>
+      <a class="btn waves-effect waves-light white black-text" href="/pwned">Tell me more</a>
     {{/if}}
     {{#if notCompromised}}
       <b class="green-text">No known breaches</b>
@@ -108,7 +113,12 @@
           <div class="col s7" style="margin-left:0px"><p class="left-align">The account you entered was not included in a known breach. Whilst this is good news for now, new breaches are occurring every day. There are some things you can do to minimise the risks future breaches.</p></div>
         </div>
       </div>
-      <a class="btn waves-effect waves-light white black-text" href="/pwned">More Information</a>
+      <div class="row">
+        <div class="valign-wrapper">
+          <div class="col s10 offset-s1"><center><p><span class="red-text">PostBreach</span> offer a number of services to help you deal with and minimise the impact of account breaches.</p></center></div>
+        </div>
+      </div>
+      <a class="btn waves-effect waves-light white black-text" href="/pwned">Tell me more</a>
     {{/if}}
   </div>
 </template>
@@ -126,12 +136,18 @@
 
   <div class="row">
     <div class="col s12">
+      <div class="card-panel red darken-2">
+        <span class="white-text">Check the server log for where and what was breached</span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
       {{#each breaches}}
         Breach
         {{this}}
         Breach
       {{/each}}
-      Breaches should go here. They're logged on the server console as a fall back
     </div>
   </div>
   <div class="row">
@@ -213,7 +229,7 @@
     <div class="col s12">iDcare is a partner of Australia Post and provides support for a range of identity theft issues, including those related to Australia Post.</div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col s12">
       We also offer a range of identity services, including tools to help you manage your accounts in our MyPost Digital Mailbox service
       <p><center><button class="btn waves-effect waves-light red darken-2 white-text">Register a Digital Mailbox</button></center></p>
     </div>
@@ -223,9 +239,12 @@
 
 <template name="business">
   {{> header}}
+
   <div class="row">
-    <div class="valign-wrapper">
-      <div class="col"><center><p>They've signed up for what?!</p></center></div>
+    <div class="col s12">
+      <div class="card-panel red darken-2">
+        <span class="white-text">Breaches of corporate email accounts pose significant security and brand risks businesses. PostBreach will offer businesses services for <span class="black-text">breach notification</span>, <span class="black-text">response</span> and <span class="black-text">education</span> to help manage these risks.</span>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -247,6 +266,18 @@
           <td><a href="mailto:{{account}}?Subject=Account%20Breach"><i class="small material-icons">mail</i></a></td>
         </tr>
         <tr>
+          <td>Selwood, Adam</td>
+          <td>adam.selwood@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Schafer, Andrew</td>
+          <td>andrew.schafer@auspost.com.au</td>
+          <td><center><i class="small material-icons green-text">done</i></center></td>
+          <td></td>
+        </tr>
+        <tr>
           <td>Fahour, Ahmed</td>
           <td>ahmed.fahour@auspost.com.au</td>
           <td><center><i class="small material-icons green-text">done</i></center></td>
@@ -265,22 +296,10 @@
           <td></td>
         </tr>
         <tr>
-          <td>Mak, Tian Ti</td>
-          <td>tianti.mak@auspost.com.au</td>
+          <td>Mak, Tien Ti</td>
+          <td>tienti.mak@auspost.com.au</td>
           <td><center><i class="small material-icons orange-text">warning</i></center></td>
-          <td><a href="mailto:tiamti.mak@auspost.com.au?Subject=Account%20Breach"><i class="small material-icons">mail</i></a></td>
-        </tr>
-        <tr>
-          <td>Selwood, Adam</td>
-          <td>adam.selwood@auspost.com.au</td>
-          <td><center><i class="small material-icons green-text">done</i></center></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>Schafer, Andrew</td>
-          <td>andrew.schafer@auspost.com.au</td>
-          <td><center><i class="small material-icons green-text">done</i></center></td>
-          <td></td>
+          <td><a href="mailto:tianti.mak@auspost.com.au?Subject=Account%20Breach"><i class="small material-icons">mail</i></a></td>
         </tr>
       </tbody>
     </table>
